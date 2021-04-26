@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/cart.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>CHADshop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <span class="toggle-button">
+        <div class="menu-bar menu-bar-top"></div>
+        <div class="menu-bar menu-bar-middle"></div>
+        <div class="menu-bar menu-bar-bottom"></div>
+      </span>
+      <div class="menu-wrap">
+        <div class="menu-sidebar">
+          <ul class="menu">
+            <li style="padding-left: 0px"><a href="#">Бытовая техника</a></li>
+            <li><a href="#">Смартфоны и гаджеты</a></li>
+            <li><a href="#">Тв и развлечения</a></li>
+            <li class="menu-item-has-children">
+              <a href="#">Click The Arrow</a>
+              <span class="sidebar-menu-arrow"></span>
+              <ul class="sub-menu">
+                <li><a href="#">Alignment</a></li>
+                <li><a href="#">Markup</a></li>
+                <li><a href="#">Comments</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Компьютеры</a></li>
+            <li><a href="#">Аксессуары</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header__top">
+        <div class="containertop">
+          <div class="header__contacts">
+            <a class="header__phone" href="tel:380963092145">+38(096)3092145</a>
+            <a class="header__email" href="#">layout585@gmail.com</a>
+            <a
+              data-fancybox
+              data-src="#modal"
+              href="javascript:;"
+              class="header__btn"
+              href="#"
+              >Бесплатная консультация</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="header__content">
+        <div class="container">
+          <div class="header__content-inner">
+            <div class="header__logo">
+              <a href="/">
+                <img src="img/logo.png" alt="" />
+              </a>
+            </div>
+            <nav class="menu">
+              <div class="header__btn-menu">
+                <span class="icon-bars"></span>
+              </div>
+              <ul>
+                <li>
+                  <a id="username" href="#"><% if(typeof login != 'undefined') { %> <%= login %> <% } %></a>
+                </li>
+                <li><a href="#">О компании</a></li>
+                <li><a href="#">Услуги</a></li>
+                <li id="Exitli">
+                  <input type="button" id="Exit" value="Выйти" />
+                </li>
+                <li id="Enterli"><a href="login">Войти</a></li>
+                <li id="Cartli">
+                  <a href="cart"
+                    >Корзина
+                    <span id="total-cart-count" class="badge">0</span></a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="search">
+        <form class="example" action="/item" method="POST">
+          <input
+            type="text"
+            autocomplete="off"
+            name="search"
+            id="search"
+            placeholder="Search.."
+          />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <div id="display"></div>
+      </div>
+    </header>
+  </body>
+</html>

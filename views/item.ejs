@@ -1,0 +1,43 @@
+<%- include('layout/header.ejs')%>
+<div class="itemcontainer">
+  <h1 class="itemname"><%= itemname %></h1>
+  <div class="nodeblock">
+    <div class="itemheader">
+      <div class="photo">
+        <img id="image" />
+      </div>
+      <div class="data">
+        <div class="cost">
+          <div class="costnum">&#8381;</div>
+        </div>
+        <div class="buy">
+          <button type="submit" id="" class="btn-buy">
+            Купить
+          </button>
+        </div>
+      </div>
+      <div class="description" id="description"></div><br/>
+      <span class="description" id="quantity">Количество: </span>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "/itemgetter",
+        data: {
+          itemname: $(".itemname").text().trim(),
+        },
+        success: function (response) {
+          $(".btn-buy").attr("id", response.Id)
+          $(".costnum").prepend(response.cost)
+          $("#description").text(response.description)
+          $("#quantity").append(response.quantity)
+          $("#image").attr("src", `img/${response.image}.png`)
+        },
+    });
+});
+</script>
+<%- include('layout/footer.ejs')%>
