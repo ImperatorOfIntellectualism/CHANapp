@@ -14,3 +14,5 @@ while working:
         print(data)
         if data == "youtube":
             webbrowser.open("youtube.com")
+        elif data == "google":
+            webbrowser.open("Google.com")
