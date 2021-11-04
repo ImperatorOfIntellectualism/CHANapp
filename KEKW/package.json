@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "watch": "tsc -w",
     "test": "nodemon dist/index.js",
-    "start": "ts-node src/index.ts",
+    "start": "node --loader ts-node/esm src/index.ts",
     "migration": "mikro-orm migration:create"
   },
   "author": "",

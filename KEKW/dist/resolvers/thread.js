@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,39 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ThreadResolver = void 0;
-const type_graphql_1 = require("type-graphql");
-const Thread_1 = require("../entities/Thread");
-const Post_1 = require("../entities/Post");
+import { Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver } from 'type-graphql';
+import { Thread } from '../entities/Thread.js';
+import { Post } from '../entities/Post.js';
 let threadArgs = class threadArgs {
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
+    Field(() => String),
     __metadata("design:type", String)
 ], threadArgs.prototype, "title", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
+    Field(() => String),
     __metadata("design:type", String)
 ], threadArgs.prototype, "op", void 0);
 threadArgs = __decorate([
-    (0, type_graphql_1.ArgsType)()
+    ArgsType()
 ], threadArgs);
 let ThreadResolver = class ThreadResolver {
     threads({ em }) {
-        return em.find(Thread_1.Thread, {});
+        return em.find(Thread, {});
     }
     thread(id, { em }) {
-        return em.findOne(Thread_1.Thread, { id }, ['posts']);
+        return em.findOne(Thread, { id }, ['posts']);
     }
     async createThread({ title, op }, { em }) {
-        const thread = em.create(Thread_1.Thread, { title: title, op: op });
+        const thread = em.create(Thread, { title: title, op: op });
         await em.persistAndFlush(thread);
         return thread;
     }
     async updateThread(id, postId, { em }) {
-        const thread = await em.findOne(Thread_1.Thread, { id });
-        const post = await em.findOne(Post_1.Post, { id: postId });
+        const thread = await em.findOne(Thread, { id });
+        const post = await em.findOne(Post, { id: postId });
         if (!thread) {
             return null;
         }
@@ -52,7 +49,7 @@ let ThreadResolver = class ThreadResolver {
         return thread;
     }
     async deleteThread(id, { em }) {
-        const thread = await em.findOne(Thread_1.Thread, { id });
+        const thread = await em.findOne(Thread, { id });
         if (!thread) {
             return null;
         }
@@ -61,47 +58,47 @@ let ThreadResolver = class ThreadResolver {
     }
 };
 __decorate([
-    (0, type_graphql_1.Query)(() => [Thread_1.Thread], { nullable: true }),
-    __param(0, (0, type_graphql_1.Ctx)()),
+    Query(() => [Thread], { nullable: true }),
+    __param(0, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ThreadResolver.prototype, "threads", null);
 __decorate([
-    (0, type_graphql_1.Query)(() => Thread_1.Thread, { nullable: true }),
-    __param(0, (0, type_graphql_1.Arg)("id", () => type_graphql_1.Int)),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Query(() => Thread, { nullable: true }),
+    __param(0, Arg("id", () => Int)),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ThreadResolver.prototype, "thread", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => Thread_1.Thread),
-    __param(0, (0, type_graphql_1.Args)()),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Mutation(() => Thread),
+    __param(0, Args()),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [threadArgs, Object]),
     __metadata("design:returntype", Promise)
 ], ThreadResolver.prototype, "createThread", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => Thread_1.Thread, { nullable: true }),
-    __param(0, (0, type_graphql_1.Arg)("id", () => Number)),
-    __param(1, (0, type_graphql_1.Arg)("postId", () => Number)),
-    __param(2, (0, type_graphql_1.Ctx)()),
+    Mutation(() => Thread, { nullable: true }),
+    __param(0, Arg("id", () => Number)),
+    __param(1, Arg("postId", () => Number)),
+    __param(2, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number, Object]),
     __metadata("design:returntype", Promise)
 ], ThreadResolver.prototype, "updateThread", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => Thread_1.Thread, { nullable: true }),
-    __param(0, (0, type_graphql_1.Arg)("id", () => Number)),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Mutation(() => Thread, { nullable: true }),
+    __param(0, Arg("id", () => Number)),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ThreadResolver.prototype, "deleteThread", null);
 ThreadResolver = __decorate([
-    (0, type_graphql_1.Resolver)()
+    Resolver()
 ], ThreadResolver);
-exports.ThreadResolver = ThreadResolver;
+export { ThreadResolver };
 //# sourceMappingURL=thread.js.map

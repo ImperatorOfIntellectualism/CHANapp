@@ -1,7 +1,7 @@
-import { MyContext } from '../types'
-import {Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver} from 'type-graphql'
-import { Thread } from '../entities/Thread'
-import { Board } from '../entities/Board';
+import { Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver } from 'type-graphql'
+import { MyContext } from '../types.js'
+import { Thread } from '../entities/Thread.js'
+import { Board } from '../entities/Board.js'
 
 @ArgsType()
 class boardArgs {
@@ -25,8 +25,8 @@ export class BoardResolver{
         {
         return em.findOne(Board, {id}, ['threads'])
     }
-    
-    //thread(ARGUMENT: DATA){ 
+
+    //thread(ARGUMENT: DATA){
     //THE COLUMN
     //}
 
@@ -39,7 +39,7 @@ export class BoardResolver{
             await em.persistAndFlush(board)
             return board
         }
-    
+
     @Mutation(() => Board, {nullable: true})
     async updateBoard(
         @Arg("id", ()=> Number) id: number,

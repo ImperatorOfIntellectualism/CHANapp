@@ -1,6 +1,6 @@
-import { Post } from '../entities/Post'
-import { MyContext } from '../types'
-import {Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver} from 'type-graphql'
+import { Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver } from 'type-graphql'
+import { Post } from '../entities/Post.js'
+import { MyContext } from '../types.js'
 
 @ArgsType()
 class postArgs {
@@ -24,8 +24,8 @@ export class PostResolver{
         {
         return em.findOne(Post, {id})
     }
-    
-    //post(ARGUMENT: DATA){ 
+
+    //post(ARGUMENT: DATA){
     //THE COLUMN
     //}
 
@@ -38,7 +38,7 @@ export class PostResolver{
             await em.persistAndFlush(post)
             return post
         }
-    
+
     @Mutation(() => Post, {nullable: true})
     async deletePost(
         @Arg("id", ()=> Number) id: number,

@@ -1,7 +1,7 @@
-import { MyContext } from '../types'
-import {Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver} from 'type-graphql'
-import { Thread } from '../entities/Thread'
-import { Post } from '../entities/Post';
+import { Arg, Args, ArgsType, Ctx, Field, Int, Mutation, Query, Resolver } from 'type-graphql'
+import { MyContext } from '../types.js'
+import { Thread } from '../entities/Thread.js'
+import { Post } from '../entities/Post.js'
 
 @ArgsType()
 class threadArgs {
@@ -28,8 +28,8 @@ export class ThreadResolver{
         {
         return em.findOne(Thread, {id}, ['posts'])
     }
-    
-    //thread(ARGUMENT: DATA){ 
+
+    //thread(ARGUMENT: DATA){
     //THE COLUMN
     //}
 
@@ -42,7 +42,7 @@ export class ThreadResolver{
             await em.persistAndFlush(thread)
             return thread
         }
-    
+
     @Mutation(() => Thread, {nullable: true})
     async updateThread(
         @Arg("id", ()=> Number) id: number,

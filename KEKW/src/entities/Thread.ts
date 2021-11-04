@@ -1,7 +1,7 @@
-import { Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core";
-import { Field, Int, ObjectType } from "type-graphql";
-import { Board } from "./Board";
-import { Post } from "./Post";
+import { Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core"
+import { Field, Int, ObjectType } from "type-graphql"
+import { Board } from "./Board.js"
+import { Post } from "./Post.js"
 
 @ObjectType()
 @Entity()

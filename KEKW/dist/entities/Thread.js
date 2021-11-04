@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,50 +7,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Thread = void 0;
-const core_1 = require("@mikro-orm/core");
-const type_graphql_1 = require("type-graphql");
-const Board_1 = require("./Board");
-const Post_1 = require("./Post");
+import { Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core";
+import { Field, Int, ObjectType } from "type-graphql";
+import { Board } from "./Board.js";
+import { Post } from "./Post.js";
 let Thread = class Thread {
     constructor() {
         this.createdAt = new Date();
-        this.posts = new core_1.Collection(this);
+        this.posts = new Collection(this);
     }
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
-    (0, core_1.PrimaryKey)(),
+    Field(() => Int),
+    PrimaryKey(),
     __metadata("design:type", Number)
 ], Thread.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'date' }),
+    Field(() => String),
+    Property({ type: 'date' }),
     __metadata("design:type", Object)
 ], Thread.prototype, "createdAt", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'text' }),
+    Field(() => String),
+    Property({ type: 'text' }),
     __metadata("design:type", String)
 ], Thread.prototype, "title", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'text' }),
+    Field(() => String),
+    Property({ type: 'text' }),
     __metadata("design:type", String)
 ], Thread.prototype, "op", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Post_1.Post]),
-    (0, core_1.OneToMany)(() => Post_1.Post, post => post.thread),
+    Field(() => [Post]),
+    OneToMany(() => Post, post => post.thread),
     __metadata("design:type", Object)
 ], Thread.prototype, "posts", void 0);
 __decorate([
-    (0, core_1.ManyToOne)(() => Board_1.Board),
-    __metadata("design:type", Board_1.Board)
+    ManyToOne(() => Board),
+    __metadata("design:type", Board)
 ], Thread.prototype, "board", void 0);
 Thread = __decorate([
-    (0, type_graphql_1.ObjectType)(),
-    (0, core_1.Entity)()
+    ObjectType(),
+    Entity()
 ], Thread);
-exports.Thread = Thread;
+export { Thread };
 //# sourceMappingURL=Thread.js.map

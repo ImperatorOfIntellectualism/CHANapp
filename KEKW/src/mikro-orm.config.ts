@@ -1,14 +1,15 @@
-import { __prod__ } from "./constants";
-import { Post } from "./entities/Post";
-import { MikroORM } from "@mikro-orm/core";
-import path from 'path'
-import { User } from "./entities/User";
-import { Thread } from "./entities/Thread";
-import { Board } from "./entities/Board";
+import { URL, fileURLToPath } from "node:url"
+import { MikroORM } from "@mikro-orm/core"
+
+import { __prod__ } from "./constants.js"
+import { Post } from "./entities/Post.js"
+import { User } from "./entities/User.js"
+import { Thread } from "./entities/Thread.js"
+import { Board } from "./entities/Board.js"
 
 export default {
     migrations: {
-      path: path.join(__dirname + '/migrations'), // path to the folder with migrations
+      path: fileURLToPath(new URL('migrations', import.meta.url)), // path to the folder with migrations
       pattern: /^[\w-]+\d+\.[tj]s$/, // regex pattern for the migration files
     },
     entities: [Post, User, Thread, Board],

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,55 +10,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserResolver = void 0;
-const type_graphql_1 = require("type-graphql");
-const User_1 = require("../entities/User");
+import { Arg, Args, ArgsType, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
+import { User } from '../entities/User.js';
 let userArgs = class userArgs {
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
+    Field(() => String),
     __metadata("design:type", String)
 ], userArgs.prototype, "login", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
+    Field(() => String),
     __metadata("design:type", String)
 ], userArgs.prototype, "password", void 0);
 userArgs = __decorate([
-    (0, type_graphql_1.ArgsType)()
+    ArgsType()
 ], userArgs);
 let FieldError = class FieldError {
 };
 __decorate([
-    (0, type_graphql_1.Field)(),
+    Field(),
     __metadata("design:type", String)
 ], FieldError.prototype, "field", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(),
+    Field(),
     __metadata("design:type", String)
 ], FieldError.prototype, "message", void 0);
 FieldError = __decorate([
-    (0, type_graphql_1.ObjectType)()
+    ObjectType()
 ], FieldError);
 let UserResponse = class UserResponse {
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => [FieldError], { nullable: true }),
+    Field(() => [FieldError], { nullable: true }),
     __metadata("design:type", Array)
 ], UserResponse.prototype, "errors", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => User_1.User, { nullable: true }),
-    __metadata("design:type", User_1.User)
+    Field(() => User, { nullable: true }),
+    __metadata("design:type", User)
 ], UserResponse.prototype, "user", void 0);
 UserResponse = __decorate([
-    (0, type_graphql_1.ObjectType)()
+    ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
     users({ em }) {
-        return em.find(User_1.User, {});
+        return em.find(User, {});
     }
     async createUser({ login, password }, { em }) {
-        const userCandidate = await em.findOne(User_1.User, { login: login });
+        const userCandidate = await em.findOne(User, { login: login });
         if (userCandidate) {
             return { errors: [{
                         field: "user",
@@ -79,13 +76,13 @@ let UserResolver = class UserResolver {
                     }] };
         }
         else {
-            const user = em.create(User_1.User, { login: login, password: password });
+            const user = em.create(User, { login: login, password: password });
             await em.persistAndFlush(user);
             return { user };
         }
     }
     async login({ login, password }, { em }) {
-        const user = await em.findOne(User_1.User, { login: login, password: password });
+        const user = await em.findOne(User, { login: login, password: password });
         if (!user) {
             return { errors: [{
                         field: "user",
@@ -109,7 +106,7 @@ let UserResolver = class UserResolver {
         }
     }
     async deleteUser(id, { em }) {
-        const user = await em.findOne(User_1.User, { id });
+        const user = await em.findOne(User, { id });
         if (!user) {
             return null;
         }
@@ -118,38 +115,38 @@ let UserResolver = class UserResolver {
     }
 };
 __decorate([
-    (0, type_graphql_1.Query)(() => [User_1.User]),
-    __param(0, (0, type_graphql_1.Ctx)()),
+    Query(() => [User]),
+    __param(0, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "users", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => UserResponse),
-    __param(0, (0, type_graphql_1.Args)()),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Mutation(() => UserResponse),
+    __param(0, Args()),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [userArgs, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => UserResponse),
-    __param(0, (0, type_graphql_1.Args)()),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Mutation(() => UserResponse),
+    __param(0, Args()),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [userArgs, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => User_1.User, { nullable: true }),
-    __param(0, (0, type_graphql_1.Arg)("id", () => Number)),
-    __param(1, (0, type_graphql_1.Ctx)()),
+    Mutation(() => User, { nullable: true }),
+    __param(0, Arg("id", () => Number)),
+    __param(1, Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteUser", null);
 UserResolver = __decorate([
-    (0, type_graphql_1.Resolver)()
+    Resolver()
 ], UserResolver);
-exports.UserResolver = UserResolver;
+export { UserResolver };
 //# sourceMappingURL=user.js.map

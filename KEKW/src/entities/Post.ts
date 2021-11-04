@@ -1,6 +1,6 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
-import { Field, Int, ObjectType } from "type-graphql";
-import { Thread } from "./Thread";
+import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core"
+import { Field, Int, ObjectType } from "type-graphql"
+import { Thread } from "./Thread.js"
 
 @ObjectType()
 @Entity()

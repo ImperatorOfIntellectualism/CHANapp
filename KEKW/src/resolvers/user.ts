@@ -1,6 +1,6 @@
-import { MyContext } from '../types'
-import {Arg, Args, ArgsType, Ctx, Field, Mutation, ObjectType, Query, Resolver} from 'type-graphql'
-import { User } from '../entities/User'
+import { Arg, Args, ArgsType, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql'
+import { MyContext } from '../types.js'
+import { User } from '../entities/User.js'
 
 @ArgsType()
 class userArgs {
@@ -37,8 +37,8 @@ export class UserResolver{
         {
         return em.find(User, {})
     }
-    
-    //User(ARGUMENT: DATA){ 
+
+    //User(ARGUMENT: DATA){
     //THE COLUMN
     //}
 
@@ -67,7 +67,7 @@ export class UserResolver{
             await em.persistAndFlush(user)
             return {user}}
         }
-    
+
     @Mutation(() => UserResponse)
     async login(
         @Args() {login, password} : userArgs,
