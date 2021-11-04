@@ -1,14 +1,14 @@
 import { __prod__ } from "./constants";
 import { Post } from "./entities/Post";
 import { MikroORM } from "@mikro-orm/core";
-import path from 'path'
+import { URL, fileURLToPath } from "url";
 import { User } from "./entities/User";
 import { Thread } from "./entities/Thread";
 import { Board } from "./entities/Board";
 
 export default {
     migrations: {
-      path: path.join(__dirname + '/migrations'), // path to the folder with migrations
+      path: fileURLToPath(new URL('migrations', import.meta.url)), // path to the folder with migrations // path to the folder with migrations
       pattern: /^[\w-]+\d+\.[tj]s$/, // regex pattern for the migration files
     },
     entities: [Post, User, Thread, Board],

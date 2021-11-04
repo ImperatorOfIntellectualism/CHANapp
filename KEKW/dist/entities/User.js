@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,10 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const core_1 = require("@mikro-orm/core");
-const type_graphql_1 = require("type-graphql");
+import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import { Field, Int, ObjectType } from "type-graphql";
 let User = class User {
     constructor() {
         this.createdAt = new Date();
@@ -19,33 +16,33 @@ let User = class User {
     }
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
-    (0, core_1.PrimaryKey)(),
+    Field(() => Int),
+    PrimaryKey(),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'date' }),
+    Field(() => String),
+    Property({ type: 'date' }),
     __metadata("design:type", Object)
 ], User.prototype, "createdAt", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'date', onUpdate: () => new Date() }),
+    Field(() => String),
+    Property({ type: 'date', onUpdate: () => new Date() }),
     __metadata("design:type", Object)
 ], User.prototype, "updatedAt", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'text', unique: true }),
+    Field(() => String),
+    Property({ type: 'text', unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "login", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'text' }),
+    Field(() => String),
+    Property({ type: 'text' }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 User = __decorate([
-    (0, type_graphql_1.ObjectType)(),
-    (0, core_1.Entity)()
+    ObjectType(),
+    Entity()
 ], User);
-exports.User = User;
+export { User };
 //# sourceMappingURL=User.js.map

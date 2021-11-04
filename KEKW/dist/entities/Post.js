@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,38 +7,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
-const core_1 = require("@mikro-orm/core");
-const type_graphql_1 = require("type-graphql");
-const Thread_1 = require("./Thread");
+import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
+import { Field, Int, ObjectType } from "type-graphql";
+import { Thread } from "./Thread";
 let Post = class Post {
     constructor() {
         this.createdAt = new Date();
     }
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
-    (0, core_1.PrimaryKey)(),
+    Field(() => Int),
+    PrimaryKey(),
     __metadata("design:type", Number)
 ], Post.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'date' }),
+    Field(() => String),
+    Property({ type: 'date' }),
     __metadata("design:type", Object)
 ], Post.prototype, "createdAt", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, core_1.Property)({ type: 'text' }),
+    Field(() => String),
+    Property({ type: 'text' }),
     __metadata("design:type", String)
 ], Post.prototype, "text", void 0);
 __decorate([
-    (0, core_1.ManyToOne)(() => Thread_1.Thread),
-    __metadata("design:type", Thread_1.Thread)
+    ManyToOne(() => Thread),
+    __metadata("design:type", Thread)
 ], Post.prototype, "thread", void 0);
 Post = __decorate([
-    (0, type_graphql_1.ObjectType)(),
-    (0, core_1.Entity)()
+    ObjectType(),
+    Entity()
 ], Post);
-exports.Post = Post;
+export { Post };
 //# sourceMappingURL=Post.js.map
