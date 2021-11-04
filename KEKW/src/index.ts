@@ -1,3 +1,4 @@
+import type fetchFn from 'node-fetch'
 import { MikroORM } from '@mikro-orm/core'
 import { __prod__ } from './constants';
 import config from './mikro-orm.config'
@@ -9,11 +10,17 @@ import { PostResolver } from './resolvers/post';
 import { UserResolver } from './resolvers/user';
 import { ThreadResolver } from './resolvers/thread';
 import { BoardResolver } from './resolvers/board';
-import fetch from '../node_modules/node-fetch';
 
 //Persist And Flush - adds model to the table
 
 const main = async ( ) => {
+    // Way to import esm-only modules from cjs
+    const _importDynamic = new Function('modulePath', 'return import(modulePath)')
+    const fetch: typeof fetchFn = (await _importDynamic('node-fetch')).default
+
+    // Test that node-fetch is working
+    // await fetch('https://httpbin.org/get').then(res => res.json()).then(console.log)
+
     const app = express()
     const apolloServer = new ApolloServer({schema: await buildSchema({resolvers: [HelloResolver, PostResolver, UserResolver, ThreadResolver, BoardResolver], validate: false}), context: () => ({em: orm.em})})
     await apolloServer.start();
@@ -28,13 +35,14 @@ const main = async ( ) => {
       });
 
     app.post('/sendimage', (req, _) => {
-        fetch('https://api.cloudinary.com/v1_1/imperatorofintellectualism/image/upload',{
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        'Content-Type': 'multipart/form-data',
-      },
-      body: req.body})
+        fetch('https://api.cloudinary.com/v1_1/imperatorofintellectualism/image/upload', {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            'Content-Type': 'multipart/form-data',
+          },
+          body: req.body
+        }).then(res => res.arrayBuffer())
     })
     
     app.get('/', (_,res)=>{res.send("CACHINNATION")})
