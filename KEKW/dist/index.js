@@ -16,7 +16,6 @@ const board_1 = require("./resolvers/board");
 const main = async () => {
     const _importDynamic = new Function('modulePath', 'return import(modulePath)');
     const fetch = (await _importDynamic('node-fetch')).default;
-    await fetch('https://httpbin.org/get').then(res => res.json()).then(console.log);
     const app = (0, express_1.default)();
     const apolloServer = new apollo_server_express_1.ApolloServer({ schema: await (0, type_graphql_1.buildSchema)({ resolvers: [hello_1.HelloResolver, post_1.PostResolver, user_1.UserResolver, thread_1.ThreadResolver, board_1.BoardResolver], validate: false }), context: () => ({ em: orm.em }) });
     await apolloServer.start();
